@@ -2,39 +2,74 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
-	"time"
+	"net"
 
 	desc "github.com/BelyaevEI/microservices_client/pkg/auth_v1"
-	"github.com/fatih/color"
+	"github.com/brianvoe/gofakeit"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/reflection"
+	"google.golang.org/protobuf/types/known/emptypb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-const (
-	address = "localhost:50051"
-	noteID  = 12
-)
+const grpcPort = 50051
+
+type server struct {
+	desc.UnimplementedAuthV1Server
+}
+
+// Create new user
+func (s *server) Create(ctx context.Context, req *desc.CreateRequest) (*desc.CreateResponse, error) {
+	log.Printf("User email: %s", req.GetInfo().GetEmail())
+	return &desc.CreateResponse{
+		Id: int64(gofakeit.Number(0, 1000)),
+	}, nil
+}
+
+// Get user by id
+func (s *server) Get(ctx context.Context, req *desc.GetRequest) (*desc.GetResponse, error) {
+	log.Printf("User id: %d", req.GetId())
+	return &desc.GetResponse{
+		User: &desc.User{
+			Id: req.Id,
+			Info: &desc.UserInfo{
+				Name:  gofakeit.BeerName(),
+				Email: gofakeit.Email(),
+				Role:  1,
+			},
+			CreatedAt: timestamppb.New(gofakeit.Date()),
+			UpdatedAt: timestamppb.New(gofakeit.Date()),
+		},
+	}, nil
+}
+
+// Update user
+func (s *server) Update(ctx context.Context, req *desc.UpdateRequest) (*emptypb.Empty, error) {
+	log.Printf("User email: %s", req.GetInfo().GetEmail())
+	return nil, nil
+}
+
+// Delete user
+func (s *server) Delete(ctx context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
+	log.Printf("User id: %d", req.GetId())
+	return nil, nil
+}
 
 func main() {
-
-	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", grpcPort))
 	if err != nil {
-		log.Fatalf("failed to connect to server: %v", err)
+		log.Fatalf("listen is failed: %v", err)
 	}
 
-	defer conn.Close()
+	s := grpc.NewServer()
+	reflection.Register(s)
+	desc.RegisterAuthV1Server(s, &server{})
 
-	c := desc.NewAuthV1Client(conn)
+	log.Printf("server listening at %v", lis.Addr())
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
-
-	r, err := c.Get(ctx, &desc.GetRequest{Id: noteID})
-	if err != nil {
-		log.Fatalf("Failed to get note by id: %v", err)
+	if err = s.Serve(lis); err != nil {
+		log.Fatalf("serve is failed: %v", err)
 	}
-
-	log.Printf(color.RedString("Note info:\n"), color.GreenString("%+v", r.GetUser()))
-
 }
