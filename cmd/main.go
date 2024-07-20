@@ -21,7 +21,7 @@ type server struct {
 }
 
 // Create new user
-func (s *server) Create(ctx context.Context, req *desc.CreateRequest) (*desc.CreateResponse, error) {
+func (s *server) CreateUser(_ context.Context, req *desc.CreateRequest) (*desc.CreateResponse, error) {
 	log.Printf("User email: %s", req.GetInfo().GetEmail())
 	return &desc.CreateResponse{
 		Id: int64(gofakeit.Number(0, 1000)),
@@ -29,7 +29,7 @@ func (s *server) Create(ctx context.Context, req *desc.CreateRequest) (*desc.Cre
 }
 
 // Get user by id
-func (s *server) Get(ctx context.Context, req *desc.GetRequest) (*desc.GetResponse, error) {
+func (s *server) GetUserById(_ context.Context, req *desc.GetRequest) (*desc.GetResponse, error) {
 	log.Printf("User id: %d", req.GetId())
 	return &desc.GetResponse{
 		User: &desc.User{
@@ -46,13 +46,13 @@ func (s *server) Get(ctx context.Context, req *desc.GetRequest) (*desc.GetRespon
 }
 
 // Update user
-func (s *server) Update(ctx context.Context, req *desc.UpdateRequest) (*emptypb.Empty, error) {
+func (s *server) UpdateUserById(_ context.Context, req *desc.UpdateRequest) (*emptypb.Empty, error) {
 	log.Printf("User email: %s", req.GetInfo().GetEmail())
 	return nil, nil
 }
 
 // Delete user
-func (s *server) Delete(ctx context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
+func (s *server) DeleteUserById(_ context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
 	log.Printf("User id: %d", req.GetId())
 	return nil, nil
 }

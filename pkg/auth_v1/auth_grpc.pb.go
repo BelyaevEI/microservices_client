@@ -20,20 +20,20 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	AuthV1_Create_FullMethodName = "/auth_v1.AuthV1/Create"
-	AuthV1_Get_FullMethodName    = "/auth_v1.AuthV1/Get"
-	AuthV1_Update_FullMethodName = "/auth_v1.AuthV1/Update"
-	AuthV1_Delete_FullMethodName = "/auth_v1.AuthV1/Delete"
+	AuthV1_CreateUser_FullMethodName     = "/auth_v1.AuthV1/CreateUser"
+	AuthV1_GetUserById_FullMethodName    = "/auth_v1.AuthV1/GetUserById"
+	AuthV1_UpdateUserById_FullMethodName = "/auth_v1.AuthV1/UpdateUserById"
+	AuthV1_DeleteUserById_FullMethodName = "/auth_v1.AuthV1/DeleteUserById"
 )
 
 // AuthV1Client is the client API for AuthV1 service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthV1Client interface {
-	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
-	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
-	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CreateUser(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
+	GetUserById(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
+	UpdateUserById(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteUserById(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type authV1Client struct {
@@ -44,40 +44,40 @@ func NewAuthV1Client(cc grpc.ClientConnInterface) AuthV1Client {
 	return &authV1Client{cc}
 }
 
-func (c *authV1Client) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
+func (c *authV1Client) CreateUser(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateResponse)
-	err := c.cc.Invoke(ctx, AuthV1_Create_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AuthV1_CreateUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authV1Client) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *authV1Client) GetUserById(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, AuthV1_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AuthV1_GetUserById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authV1Client) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *authV1Client) UpdateUserById(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, AuthV1_Update_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AuthV1_UpdateUserById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authV1Client) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *authV1Client) DeleteUserById(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, AuthV1_Delete_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AuthV1_DeleteUserById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,10 +88,10 @@ func (c *authV1Client) Delete(ctx context.Context, in *DeleteRequest, opts ...gr
 // All implementations must embed UnimplementedAuthV1Server
 // for forward compatibility
 type AuthV1Server interface {
-	Create(context.Context, *CreateRequest) (*CreateResponse, error)
-	Get(context.Context, *GetRequest) (*GetResponse, error)
-	Update(context.Context, *UpdateRequest) (*emptypb.Empty, error)
-	Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error)
+	CreateUser(context.Context, *CreateRequest) (*CreateResponse, error)
+	GetUserById(context.Context, *GetRequest) (*GetResponse, error)
+	UpdateUserById(context.Context, *UpdateRequest) (*emptypb.Empty, error)
+	DeleteUserById(context.Context, *DeleteRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAuthV1Server()
 }
 
@@ -99,17 +99,17 @@ type AuthV1Server interface {
 type UnimplementedAuthV1Server struct {
 }
 
-func (UnimplementedAuthV1Server) Create(context.Context, *CreateRequest) (*CreateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedAuthV1Server) CreateUser(context.Context, *CreateRequest) (*CreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
-func (UnimplementedAuthV1Server) Get(context.Context, *GetRequest) (*GetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+func (UnimplementedAuthV1Server) GetUserById(context.Context, *GetRequest) (*GetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserById not implemented")
 }
-func (UnimplementedAuthV1Server) Update(context.Context, *UpdateRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+func (UnimplementedAuthV1Server) UpdateUserById(context.Context, *UpdateRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserById not implemented")
 }
-func (UnimplementedAuthV1Server) Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+func (UnimplementedAuthV1Server) DeleteUserById(context.Context, *DeleteRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserById not implemented")
 }
 func (UnimplementedAuthV1Server) mustEmbedUnimplementedAuthV1Server() {}
 
@@ -124,74 +124,74 @@ func RegisterAuthV1Server(s grpc.ServiceRegistrar, srv AuthV1Server) {
 	s.RegisterService(&AuthV1_ServiceDesc, srv)
 }
 
-func _AuthV1_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AuthV1_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthV1Server).Create(ctx, in)
+		return srv.(AuthV1Server).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthV1_Create_FullMethodName,
+		FullMethod: AuthV1_CreateUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthV1Server).Create(ctx, req.(*CreateRequest))
+		return srv.(AuthV1Server).CreateUser(ctx, req.(*CreateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthV1_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AuthV1_GetUserById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthV1Server).Get(ctx, in)
+		return srv.(AuthV1Server).GetUserById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthV1_Get_FullMethodName,
+		FullMethod: AuthV1_GetUserById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthV1Server).Get(ctx, req.(*GetRequest))
+		return srv.(AuthV1Server).GetUserById(ctx, req.(*GetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthV1_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AuthV1_UpdateUserById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthV1Server).Update(ctx, in)
+		return srv.(AuthV1Server).UpdateUserById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthV1_Update_FullMethodName,
+		FullMethod: AuthV1_UpdateUserById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthV1Server).Update(ctx, req.(*UpdateRequest))
+		return srv.(AuthV1Server).UpdateUserById(ctx, req.(*UpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthV1_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AuthV1_DeleteUserById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthV1Server).Delete(ctx, in)
+		return srv.(AuthV1Server).DeleteUserById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthV1_Delete_FullMethodName,
+		FullMethod: AuthV1_DeleteUserById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthV1Server).Delete(ctx, req.(*DeleteRequest))
+		return srv.(AuthV1Server).DeleteUserById(ctx, req.(*DeleteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -204,20 +204,20 @@ var AuthV1_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AuthV1Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Create",
-			Handler:    _AuthV1_Create_Handler,
+			MethodName: "CreateUser",
+			Handler:    _AuthV1_CreateUser_Handler,
 		},
 		{
-			MethodName: "Get",
-			Handler:    _AuthV1_Get_Handler,
+			MethodName: "GetUserById",
+			Handler:    _AuthV1_GetUserById_Handler,
 		},
 		{
-			MethodName: "Update",
-			Handler:    _AuthV1_Update_Handler,
+			MethodName: "UpdateUserById",
+			Handler:    _AuthV1_UpdateUserById_Handler,
 		},
 		{
-			MethodName: "Delete",
-			Handler:    _AuthV1_Delete_Handler,
+			MethodName: "DeleteUserById",
+			Handler:    _AuthV1_DeleteUserById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
