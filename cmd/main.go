@@ -41,6 +41,7 @@ func main() {
 // Create new user
 func (s *server) CreateUser(_ context.Context, req *desc.CreateRequest) (*desc.CreateResponse, error) {
 	log.Printf("User email: %s", req.GetInfo().GetEmail())
+
 	return &desc.CreateResponse{
 		Id: int64(gofakeit.Number(0, 1000)),
 	}, nil
@@ -49,6 +50,7 @@ func (s *server) CreateUser(_ context.Context, req *desc.CreateRequest) (*desc.C
 // Get user by id
 func (s *server) GetUserByID(_ context.Context, req *desc.GetRequest) (*desc.GetResponse, error) {
 	log.Printf("User id: %d", req.GetId())
+
 	return &desc.GetResponse{
 		User: &desc.User{
 			Id: req.Id,
@@ -66,11 +68,13 @@ func (s *server) GetUserByID(_ context.Context, req *desc.GetRequest) (*desc.Get
 // Update user
 func (s *server) UpdateUserByID(_ context.Context, req *desc.UpdateRequest) (*emptypb.Empty, error) {
 	log.Printf("User email: %s", req.GetInfo().GetEmail())
+
 	return nil, nil
 }
 
 // Delete user
 func (s *server) DeleteUserByID(_ context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
 	log.Printf("User id: %d", req.GetId())
+
 	return nil, nil
 }
