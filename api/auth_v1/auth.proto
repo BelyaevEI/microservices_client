@@ -10,9 +10,9 @@ option go_package = "github.com/BelyaevEI/microservices_client/pkg/auth_v1;auth_
 
 service AuthV1 {
     rpc CreateUser(CreateRequest) returns (CreateResponse);
-    rpc GetUserById(GetRequest) returns (GetResponse);
-    rpc UpdateUserById(UpdateRequest) returns (google.protobuf.Empty);
-    rpc DeleteUserById(DeleteRequest) returns (google.protobuf.Empty);
+    rpc GetUserByID(GetRequest) returns (GetResponse);
+    rpc UpdateUserByID(UpdateRequest) returns (google.protobuf.Empty);
+    rpc DeleteUserByID(DeleteRequest) returns (google.protobuf.Empty);
   }
 
   message CreateRequest {

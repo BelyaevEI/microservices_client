@@ -29,7 +29,7 @@ func (s *server) CreateUser(_ context.Context, req *desc.CreateRequest) (*desc.C
 }
 
 // Get user by id
-func (s *server) GetUserById(_ context.Context, req *desc.GetRequest) (*desc.GetResponse, error) {
+func (s *server) GetUserByID(_ context.Context, req *desc.GetRequest) (*desc.GetResponse, error) {
 	log.Printf("User id: %d", req.GetId())
 	return &desc.GetResponse{
 		User: &desc.User{
@@ -46,13 +46,13 @@ func (s *server) GetUserById(_ context.Context, req *desc.GetRequest) (*desc.Get
 }
 
 // Update user
-func (s *server) UpdateUserById(_ context.Context, req *desc.UpdateRequest) (*emptypb.Empty, error) {
+func (s *server) UpdateUserByID(_ context.Context, req *desc.UpdateRequest) (*emptypb.Empty, error) {
 	log.Printf("User email: %s", req.GetInfo().GetEmail())
 	return nil, nil
 }
 
 // Delete user
-func (s *server) DeleteUserById(_ context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
+func (s *server) DeleteUserByID(_ context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
 	log.Printf("User id: %d", req.GetId())
 	return nil, nil
 }
