@@ -6,18 +6,36 @@ import (
 	"log"
 	"net"
 
-	desc "github.com/BelyaevEI/microservices_client/pkg/auth_v1"
 	"github.com/brianvoe/gofakeit"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
+
+	desc "github.com/BelyaevEI/microservices_client/pkg/auth_v1"
 )
 
 const grpcPort = 50051
 
 type server struct {
 	desc.UnimplementedAuthV1Server
+}
+
+func main() {
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", grpcPort))
+	if err != nil {
+		log.Fatalf("listen is failed: %v", err)
+	}
+
+	s := grpc.NewServer()
+	reflection.Register(s)
+	desc.RegisterAuthV1Server(s, &server{})
+
+	log.Printf("server listening at %v", lis.Addr())
+
+	if err = s.Serve(lis); err != nil {
+		log.Fatalf("serve is failed: %v", err)
+	}
 }
 
 // Create new user
@@ -55,21 +73,4 @@ func (s *server) UpdateUserByID(_ context.Context, req *desc.UpdateRequest) (*em
 func (s *server) DeleteUserByID(_ context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
 	log.Printf("User id: %d", req.GetId())
 	return nil, nil
-}
-
-func main() {
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", grpcPort))
-	if err != nil {
-		log.Fatalf("listen is failed: %v", err)
-	}
-
-	s := grpc.NewServer()
-	reflection.Register(s)
-	desc.RegisterAuthV1Server(s, &server{})
-
-	log.Printf("server listening at %v", lis.Addr())
-
-	if err = s.Serve(lis); err != nil {
-		log.Fatalf("serve is failed: %v", err)
-	}
 }
