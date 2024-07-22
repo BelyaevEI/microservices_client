@@ -36,6 +36,7 @@ func main() {
 	if err = s.Serve(lis); err != nil {
 		log.Fatalf("serve is failed: %v", err)
 	}
+
 }
 
 // Create new user

@@ -2,10 +2,10 @@ name: Go
 
 on:
   push:
-    branches: [ main, master, hw1 ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main, master, hw1 ]
-    
+    branches: [ main, master ]
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
