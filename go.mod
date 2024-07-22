@@ -1,6 +1,6 @@
 module github.com/BelyaevEI/microservices_client
 
-go 1.22.2
+go 1.22
 
 require (
 	google.golang.org/grpc v1.65.0
