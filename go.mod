@@ -1,6 +1,6 @@
 module github.com/BelyaevEI/microservices_auth
 
-go 1.22.2
+go 1.22
 
 require (
 	github.com/georgysavva/scany v1.2.2
