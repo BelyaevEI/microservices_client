@@ -8,7 +8,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-// Update updates a user.
+// UpdateUserByID updates a user.
 func (i *Implementation) UpdateUserByID(ctx context.Context, req *desc.UpdateRequest) (*emptypb.Empty, error) {
 	err := i.userService.UpdateUserByID(ctx, req.GetId(), converter.ToUserUpdateFromDesc(req))
 	if err != nil {
