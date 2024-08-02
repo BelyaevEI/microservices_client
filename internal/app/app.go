@@ -23,6 +23,7 @@ func init() {
 	configPath = os.Getenv("CONFIG_PATH")
 }
 
+// App represents the app.
 type App struct {
 	serviceProvider *serviceProvider
 	grpcServer      *grpc.Server

@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// Create creates a new user.
+// CreateUser creates a new user.
 func (i *Implementation) CreateUser(ctx context.Context, req *desc.CreateRequest) (*desc.CreateResponse, error) {
 
 	if req.GetPassword() != req.GetPasswordConfirm() {

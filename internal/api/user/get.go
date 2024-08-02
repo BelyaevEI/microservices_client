@@ -8,7 +8,7 @@ import (
 	desc "github.com/BelyaevEI/microservices_auth/pkg/auth_v1"
 )
 
-// Get gets a user.
+// GetUserByID gets a user.
 func (i *Implementation) GetUserByID(ctx context.Context, req *desc.GetRequest) (*desc.GetResponse, error) {
 	user, err := i.userService.GetUserByID(ctx, req.GetId())
 	if err != nil {
