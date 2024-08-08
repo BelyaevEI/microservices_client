@@ -1,3 +1,5 @@
+github.com/BelyaevEI/platform_common v0.0.0-20240807170820-1724a7dbce30 h1:qgfPEt3Cp2cxnT10uJkHM92TXWYTVb8TVjLS54PdVaQ=
+github.com/BelyaevEI/platform_common v0.0.0-20240807170820-1724a7dbce30/go.mod h1:XFihNCYxhnW+BT0Kwzkl/GWQCl5Fo2pqdR/4vBYb8eg=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
 github.com/Masterminds/squirrel v1.5.4 h1:uUcX/aBc8O7Fg9kaISIUsHXdKuqehiXAMQTYX8afzqM=

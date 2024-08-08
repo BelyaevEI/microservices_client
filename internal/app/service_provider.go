@@ -5,10 +5,11 @@ import (
 	"log"
 
 	"github.com/BelyaevEI/microservices_auth/internal/api/user"
-	"github.com/BelyaevEI/microservices_auth/internal/client/db"
-	"github.com/BelyaevEI/microservices_auth/internal/client/db/pg"
-	"github.com/BelyaevEI/microservices_auth/internal/client/db/transaction"
-	"github.com/BelyaevEI/microservices_auth/internal/closer"
+	"github.com/BelyaevEI/platform_common/pkg/closer"
+	"github.com/BelyaevEI/platform_common/pkg/db"
+	"github.com/BelyaevEI/platform_common/pkg/db/pg"
+	"github.com/BelyaevEI/platform_common/pkg/db/transaction"
+
 	"github.com/BelyaevEI/microservices_auth/internal/config"
 	"github.com/BelyaevEI/microservices_auth/internal/repository"
 	userRepository "github.com/BelyaevEI/microservices_auth/internal/repository/user"
