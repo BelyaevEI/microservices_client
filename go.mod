@@ -3,7 +3,7 @@ module github.com/BelyaevEI/microservices_auth
 go 1.22
 
 require (
-	github.com/georgysavva/scany v1.2.2
+	github.com/BelyaevEI/platform_common v0.0.0-20240807170820-1724a7dbce30
 	github.com/joho/godotenv v1.5.1
 	github.com/pkg/errors v0.9.1
 	golang.org/x/crypto v0.25.0
@@ -12,7 +12,7 @@ require (
 )
 
 require (
-	github.com/BelyaevEI/platform_common v0.0.0-20240807170820-1724a7dbce30 // indirect
+	github.com/georgysavva/scany v1.2.2 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
@@ -26,8 +26,9 @@ require (
 
 require (
 	github.com/Masterminds/squirrel v1.5.4
-	github.com/jackc/pgconn v1.14.3
-	github.com/jackc/pgx/v4 v4.18.3
+	github.com/gomodule/redigo v1.9.2
+	github.com/jackc/pgconn v1.14.3 // indirect
+	github.com/jackc/pgx/v4 v4.18.3 // indirect
 	golang.org/x/net v0.25.0 // indirect
 	golang.org/x/sys v0.22.0 // indirect
 	golang.org/x/text v0.16.0 // indirect
